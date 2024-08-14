@@ -1,7 +1,16 @@
 FactoryBot.define do
   factory :usuario do
-    nome { "MyString" }
-    email { "MyString" }
-    perfil { 1 }
+    nome { Faker::Name.name }
+    email { Faker::Internet.email }
+    perfil { 0 }
   end
+
+  trait :nome_acima_permitido do
+    nome { Faker::Lorem.characters(number: 80) }
+  end
+
+  trait :email_com_formato_invalido do
+    email { Faker::Internet.url }
+  end
+
 end
