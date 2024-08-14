@@ -1,34 +1,42 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="d-flex justify-content-between">
+  <div class="col">
+    <%= image_tag "maino.png", size: "715X250" %>
   </div>
+  <div class="col-5 pt-4">
+    <h2>Cadastra-se</h2>
+    <div class="mb-3 pt-4">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+        <div class="mb-3 col-8">
+          <%= f.label :email, class:"form-label" %>
+          <%= f.email_field :email, class:"form-control" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+        <div class="mb-3 col-8">
+          <%= f.label 'Senha', class:"form-label"%>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> caracteres mínimos)</em>
+          <% end %><br />
+          <%= f.password_field :password, class:"form-control" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :nome %><br />
-    <%= f.text_field :nome %>
-  </div>
+        <div class="mb-3 col-8">
+          <%= f.label 'Confirmação de Senha', class:"form-label" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
+        </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+        <div class="mb-3 col-8">
+          <%= f.label :nome, class:"form-label" %>
+          <%= f.text_field :nome, class:"form-control" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Cadastra-se", class:"btn btn-success" %>
+        </div>
+      <% end %>
+
+    </div>
 
 <%= render "devise/shared/links" %>
+  </div>
