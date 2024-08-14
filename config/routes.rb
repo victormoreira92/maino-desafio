@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :usuarios
   resources :usuarios
   get 'dashboard/index'
   get 'home' => 'home_index#index'

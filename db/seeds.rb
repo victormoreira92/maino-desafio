@@ -8,5 +8,7 @@
 
 Usuario.create(nome: 'Admin',
                email: 'admin@admin.com',
-               perfil: :admin
+               perfil: :admin,
+               password: 'admin123',
+               password_confirmation: 'admin123'
 )
