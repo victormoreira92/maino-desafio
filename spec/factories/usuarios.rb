@@ -3,6 +3,8 @@ FactoryBot.define do
     nome { Faker::Name.name }
     email { Faker::Internet.email }
     perfil { 0 }
+    password { "123456" }
+    password_confirmation { "123456" }
   end
 
   trait :nome_acima_permitido do
