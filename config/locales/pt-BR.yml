@@ -5,9 +5,16 @@ pt-BR:
       usuario: "Usuário"
     attributes:
       usuario:
+        password: "Senha"
+        password_confirmation: "Confirmação de Senha"
         perfil:
           adm: "Administrador"
           cliente: "Cliente"
+    success:
+      messages:
+        create: '%{model} foi cadastrado com sucesso'
+        update: '%{model} foi editado com sucesso'
+        destroy: '%{model} foi deletado com sucesso'
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

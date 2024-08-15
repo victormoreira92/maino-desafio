@@ -4,7 +4,9 @@
 
 <div id="usuarios">
   <% @usuarios.each do |usuario| %>
-    <%= render usuario %>
+    <p><%= usuario.nome %>></p>
+    <p><%= usuario.email %>></p>
+    <p><%= usuario.perfil %>></p>
     <p>
       <%= link_to "Show this usuario", usuario %>
     </p>

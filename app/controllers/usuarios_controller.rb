@@ -38,11 +38,11 @@ class UsuariosController < ApplicationController
   def update
     respond_to do |format|
       if @usuario.update(usuario_params)
-        format.html { redirect_to usuario_url(@usuario), notice: "Usuario was successfully updated." }
-        format.json { render :show, status: :ok, location: @usuario }
+        flash[:success] = t('activerecord.success.messages.update', model: Usuario.model_name.human)
+        format.html { redirect_to usuario_url(@usuario) }
       else
+        flash[:error] = @usuario.errors.full_messages
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @usuario.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,6 +65,6 @@ class UsuariosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def usuario_params
-      params.require(:usuario).permit(:email, :nome, :perfil)
+      params.require(:usuario).permit(:email, :nome, :perfil, :password, :password_confirmation)
     end
 end

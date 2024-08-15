@@ -10,7 +10,7 @@ class Usuario < ApplicationRecord
     cliente: 1
   }
 
-  validates :nome, :email, presence: true
+  validates :nome, :email, :password,:password_confirmation,  presence: true
   validates :email, uniqueness: { case_sensitive: false }
   validates :nome, length: { minimum: 2, maximum: 75 }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
