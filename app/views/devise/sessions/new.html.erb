@@ -1,0 +1,37 @@
+<div class="d-flex justify-content-between">
+      <div class="col">
+          <%= image_tag "maino.png", size: "715X250" %>
+      </div>
+      <div class="col-5 pt-4">
+        <h2>Entrar</h2>
+        <div class="mb-3">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="mb-3 col-6">
+              <%= f.label :email, class:"form-label" %>
+              <%= f.email_field :email, autofocus: true, class:"form-control" %>
+            </div>
+
+            <div class="mb-3 col-6">
+              <%= f.label :password, class:"form-label"%>
+              <%= f.password_field :password, class:"form-control" %>
+            </div>
+
+            <% if devise_mapping.rememberable? %>
+              <div class="input-group">
+                <%= f.check_box :remember_me, class:"form-check-input"%>
+                <%= f.label'Lembrar-me', class:"form-label px-2" %>
+              </div>
+            <% end %>
+
+            <div class="mb-3 pt-2">
+              <%= f.submit "Entrar", class:"btn btn-success" %>
+            </div>
+          <% end %>
+
+
+        </div>
+        <%= render "devise/shared/links" %>
+      </div>
+</div>
+
+
