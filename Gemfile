@@ -65,6 +65,7 @@ group :development, :test do
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'minitest', '5.24.1'
 end
 
 group :development do
