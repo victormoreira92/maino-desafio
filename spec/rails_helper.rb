@@ -62,6 +62,7 @@ RSpec.configure do |config|
 
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.extend RequestMacros, type: :request
+  config.include ActiveStorageValidations::Matchers
 
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
