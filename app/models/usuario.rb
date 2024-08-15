@@ -5,6 +5,8 @@ class Usuario < ApplicationRecord
          :recoverable, :rememberable, :validatable
   before_validation :set_perfil, on: :create
 
+  has_many :documentos
+
   enum perfil: {
     admin: 0,
     cliente: 1

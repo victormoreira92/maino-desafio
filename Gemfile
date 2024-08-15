@@ -52,6 +52,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "devise"
+gem 'active_storage_validations', '~> 1.1', '>= 1.1.4'
 
 group :development, :test do
   gem 'awesome_print'

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :documentos
 
   get 'dashboard/index'
   get 'home' => 'home_index#index'
