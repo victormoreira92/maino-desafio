@@ -25,11 +25,11 @@ class DocumentosController < ApplicationController
 
     respond_to do |format|
       if @documento.save
-        format.html { redirect_to documento_url(@documento), notice: "Documento was successfully created." }
-        format.json { render :show, status: :created, location: @documento }
+        flash[:success] = t('activerecord.success.messages.create', model: Documento.model_name.human)
+        format.html { redirect_to documento_url(@documento)}
       else
+        flash[:error] = @documento.errors.full_messages
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @documento.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -38,11 +38,11 @@ class DocumentosController < ApplicationController
   def update
     respond_to do |format|
       if @documento.update(documento_params)
-        format.html { redirect_to documento_url(@documento), notice: "Documento was successfully updated." }
-        format.json { render :show, status: :ok, location: @documento }
+        flash[:success] = t('activerecord.success.messages.update', model: Documento.model_name.human)
+        format.html { redirect_to documento_url(@documento)}
       else
+        flash[:error] = @documento.errors.full_messages
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @documento.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -52,8 +52,8 @@ class DocumentosController < ApplicationController
     @documento.destroy
 
     respond_to do |format|
-      format.html { redirect_to documentos_url, notice: "Documento was successfully destroyed." }
-      format.json { head :no_content }
+      flash[:success] = t('activerecord.success.messages.destroy', modelo: Documento.model_name.human)
+      format.html { redirect_to documentos_url}
     end
   end
 
@@ -65,6 +65,6 @@ class DocumentosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def documento_params
-      params.require(:documento).permit(:titulo, :usuario_id)
+      params.require(:documento).permit(:titulo, :usuario_id, :arquivo)
     end
 end
