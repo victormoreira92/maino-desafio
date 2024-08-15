@@ -13,10 +13,10 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/documentos", type: :request do
-  
-  # This should return the minimal set of attributes required to create a valid
-  # Documento. As you add validations to Documento, be sure to
-  # adjust the attributes here as well.
+  let!(:documento) { create(:documento, :com_arquivo_xml) }
+  let!(:documento_valido) { build(:documento, :com_arquivo_xml) }
+
+  let(:usuario) { create(:usuario) }
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
   }
@@ -25,111 +25,130 @@ RSpec.describe "/documentos", type: :request do
     skip("Add a hash of attributes invalid for your model")
   }
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      Documento.create! valid_attributes
-      get documentos_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      documento = Documento.create! valid_attributes
-      get documento_url(documento)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_documento_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "renders a successful response" do
-      documento = Documento.create! valid_attributes
-      get edit_documento_url(documento)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Documento" do
-        expect {
-          post documentos_url, params: { documento: valid_attributes }
-        }.to change(Documento, :count).by(1)
+  describe  "GET #index" do
+    context "quando acessar a index" do
+      it 'listar todos os documentos do usuario' do
+        get documentos_url
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include(documento.titulo)
       end
+    end
+  end
 
-      it "redirects to the created documento" do
-        post documentos_url, params: { documento: valid_attributes }
+  describe 'GET #show' do
+    context 'quando acessar a show' do
+        it 'acessar documentos do usuario' do
+          get documentos_url(documento)
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(documento.titulo)
+        end
+    end
+  end
+
+  describe 'GET #new' do
+    context 'quando acessar a new' do
+      it 'retornar pagina' do
+          get new_documento_url
+          expect(response).to be_successful
+      end
+    end
+  end
+
+  describe 'GET #edit' do
+    context 'quando acessar a edit' do
+
+      it 'retorna edit documento' do
+        documento = Documento.create!(titulo: Faker::Lorem.word,
+                                      usuario: usuario,
+                                      arquivo: fixture_file_upload('dummy.txt', 'text/xml'))
+        get edit_documento_url(documento)
+        expect(response).to be_successful
+      end
+    end
+  end
+
+  describe 'POST #create' do
+    context 'com paramêtros válidos' do
+      it 'criação com todos os elementos' do
+
+        post documentos_url, params: { documento: { titulo: Faker::Lorem.sentence,
+                                                    usuario_id: usuario.id,
+                                                    arquivo: fixture_file_upload('dummy.xml', 'text/xml') }
+        }
         expect(response).to redirect_to(documento_url(Documento.last))
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new Documento" do
-        expect {
-          post documentos_url, params: { documento: invalid_attributes }
-        }.to change(Documento, :count).by(0)
-      end
+    context 'com parametros faltando' do
+      it 'com titulo faltando' do
+          post documentos_url, params: { documento: { titulo: nil,
+                                               arquivo: fixture_file_upload('dummy.xml', 'text/xml'),
+                                               usuario_id: usuario.id }
 
-    
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post documentos_url, params: { documento: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+          }
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(flash[:error]).to include('Titulo não pode ficar em branco')
       end
-    
+      it 'com arquivo faltando' do
+        post documentos_url, params: { documento: { titulo: documento.titulo,
+                                                    arquivo: nil,
+                                                    usuario_id: usuario.id }
+
+        }
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(flash[:error]).to include('Arquivo não pode ficar em branco')
+      end
+      it 'usuário faltando' do
+        post documentos_url, params: { documento: { titulo: documento.titulo,
+                                                    arquivo: fixture_file_upload('dummy.xml', 'text/xml'),
+                                                    usuario_id: nil }
+
+        }
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(flash[:error]).to include('Usuario é obrigatório(a)')
+      end
     end
   end
 
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+  describe 'PUT #update' do
+    before do
+      documento
+      documento_valido
+    end
+    context 'quando atualizados com validade' do
+      it 'com todos os campos' do
+        patch documento_path(documento), params: { documento: { titulo: documento.titulo,
+                                                              arquivo: fixture_file_upload('dummy.xml', 'text/xml')
+        }}
 
-      it "updates the requested documento" do
-        documento = Documento.create! valid_attributes
-        patch documento_url(documento), params: { documento: new_attributes }
-        documento.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the documento" do
-        documento = Documento.create! valid_attributes
-        patch documento_url(documento), params: { documento: new_attributes }
-        documento.reload
-        expect(response).to redirect_to(documento_url(documento))
+        expect(response).to redirect_to(documento_url(Documento.last))
+        expect(flash[:success]).to include('Documento foi editado com sucesso')
       end
     end
+    context 'quando os campos estão faltando' do
+      it 'titulo faltando' do
+        patch documento_path(documento), params: { documento: { titulo: nil}}
 
-    context "with invalid parameters" do
-    
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        documento = Documento.create! valid_attributes
-        patch documento_url(documento), params: { documento: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
+        expect(flash[:error]).to include('Titulo não pode ficar em branco')
       end
-    
-    end
-  end
+      it 'arquivo faltando' do
+        patch documento_path(documento), params: { documento: { arquivo: nil}}
 
-  describe "DELETE /destroy" do
-    it "destroys the requested documento" do
-      documento = Documento.create! valid_attributes
-      expect {
-        delete documento_url(documento)
-      }.to change(Documento, :count).by(-1)
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(flash[:error]).to include('Arquivo não pode ficar em branco')
+      end
     end
+    context 'quando os campos são inválidos' do
+      it 'arquivo com formato diferente de xml' do
+        patch documento_path(documento), params: { documento: { arquivo: fixture_file_upload('dummy.txt', 'plain/text')}}
 
-    it "redirects to the documentos list" do
-      documento = Documento.create! valid_attributes
-      delete documento_url(documento)
-      expect(response).to redirect_to(documentos_url)
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(flash[:error]).to include('Arquivo não é arquivo no formato XML')
+      end
     end
   end
 end
+
+
+
