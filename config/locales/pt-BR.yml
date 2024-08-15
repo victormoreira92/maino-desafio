@@ -3,6 +3,7 @@ pt-BR:
   activerecord:
     models:
       usuario: "Usuário"
+      documento: "Documento"
     attributes:
       usuario:
         password: "Senha"
