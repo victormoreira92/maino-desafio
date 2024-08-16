@@ -53,6 +53,7 @@ gem "bootsnap", require: false
 
 gem "devise"
 gem 'active_storage_validations', '~> 1.1', '>= 1.1.4'
+gem "cancancan"
 
 group :development, :test do
   gem 'awesome_print'

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :documentos
+  get '/404', to: 'errors#not_found'
+  get '/500', to: 'errors#internal_server'
+  get '/403', to: 'errors#access_denied'
 
   get 'dashboard/index'
   get 'home' => 'home_index#index'
@@ -11,6 +13,7 @@ Rails.application.routes.draw do
     }
 
   resources :usuarios, except: %i[create destroy]
+  resources :documentos
 
 
 
