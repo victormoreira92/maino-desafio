@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_15_183223) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_16_194531) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_15_183223) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["usuario_id"], name: "index_documentos_on_usuario_id"
+  end
+
+  create_table "notas_fiscais", force: :cascade do |t|
+    t.string "serie"
+    t.string "nNF"
+    t.datetime "dhEmi"
+    t.string "dest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "usuarios", force: :cascade do |t|
