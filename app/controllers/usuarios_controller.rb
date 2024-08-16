@@ -1,5 +1,6 @@
 class UsuariosController < ApplicationController
-  before_action :set_usuario, only: %i[show edit update destroy]
+  load_and_authorize_resource
+  #before_action :set_usuario, only: %i[show edit update destroy]
 
   # GET /usuarios or /usuarios.json
   def index
