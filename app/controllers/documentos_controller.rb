@@ -52,7 +52,7 @@ class DocumentosController < ApplicationController
     @documento.destroy
 
     respond_to do |format|
-      flash[:success] = t('activerecord.success.messages.destroy', modelo: Documento.model_name.human)
+      flash[:success] = t('activerecord.success.messages.destroy', model: Documento.model_name.human)
       format.html { redirect_to documentos_url}
     end
   end
