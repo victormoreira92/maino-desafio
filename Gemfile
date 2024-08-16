@@ -52,6 +52,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "devise"
+gem 'active_storage_validations', '~> 1.1', '>= 1.1.4'
 gem "cancancan"
 
 group :development, :test do
@@ -65,6 +66,7 @@ group :development, :test do
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'minitest', '5.24.1'
 end
 
 group :development do

@@ -1,0 +1,14 @@
+<div id="<%= dom_id documento %>" class="p-2">
+  <div class="card" style="width: 20rem;">
+    <div class="card-body">
+      <h5 class="card-title nome"><%= documento.titulo %></h5>
+      <p class="card-text data"><%= documento.created_at.strftime('%Y-%m-%d') %></p>
+      <div class="card-footer d-flex justify-content-around">
+        <%= link_to "Ver", documento, class:"btn btn-info" %>
+        <%= link_to "Editar",edit_documento_path(documento), class:"btn btn-warning" %>
+        <%= link_to "Deletar", documento_path(documento),method: :delete,
+                    class:"btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>

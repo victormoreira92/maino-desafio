@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     }
 
   resources :usuarios, except: %i[create destroy]
+  resources :documentos
 
 
 

@@ -1,0 +1,92 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container mt-5">
+  <div class="d-flex justify-content-between">
+    <h3>Meus Documentos</h3>
+    <%= link_to "New documento", new_documento_path, class:"btn btn-success"%>
+  </div>
+
+  <div class="col-lg-12 pb-lg-2">
+  <div class="card px-2 py-1">
+    <div class="card-body p-0 d-flex justify-content-lg-between">
+      <div class="card-text">
+        <label class="font-weight-normal">Categories:</label>
+        <select>
+          <option>XXX</option>
+          <option>XXX</option>
+          <option>XXX</option>
+        </select>
+      </div>
+      <div class="card-text">
+        <label class="font-weight-normal">Categories:</label>
+        <select>
+          <option>XXX</option>
+          <option>XXX</option>
+          <option>XXX</option>
+        </select>
+        <input type="text">
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div id="hacker-list">
+    <input class="search" />
+    <span class="sort" data-sort="name">Sort by name</span>
+    <span class="sort" data-sort="city">Sort by city</span>
+
+    <div class="container mt-5">
+      <div class="d-flex justify-content-between mb-3">
+        <button class="btn btn-primary sort" data-sort="nome">Ordenar por Nome</button>
+        <button class="btn btn-primary sort" data-sort="criacao">Ordenar por Data</button>
+      </div>
+      <div id="itemList">
+        <div class="list">
+          <div class="item">
+            <span class="name">Alice</span>
+            <span class="date">2023-08-01</span>
+          </div>
+          <div class="item">
+            <span class="name">Bob</span>
+            <span class="date">2024-01-15</span>
+          </div>
+          <div class="item">
+            <span class="name">Charlie</span>
+            <span class="date">2022-05-20</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="documentos">
+  <% if @documentos.empty? %>
+    <div class="card col-6">
+      <div class="card-title">
+        <h3>Não há documentos anexados</h3>
+      </div>
+    </div>
+  <% else %>
+        <div id="listaDocumentos" class="container mt-5">
+          <div class="d-flex justify-content-between mb-3">
+            <input class="search" placeholder="Buscar documentos" />
+            <button class="sort" data-sort="nome">Ordenar por Nome</button>
+            <button class="sort" data-sort="data">Ordenar por Data</button>
+          </div>
+          <ul class="list">
+            <% @documentos.each do |documento| %>
+              <li class="list-inline-item">
+                <div class="card">
+                  <div class="card-body">
+                    <%= render documento %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+  <% end %>
+
+</div>
+

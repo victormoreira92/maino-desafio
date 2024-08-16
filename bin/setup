@@ -1,4 +1,4 @@
-#!home/vhmrj92/.rvm/rubies/ruby-3.0.2/bin/ruby
+#!/usr/bin/env ruby
 require "fileutils"
 
 # path to your application root.
