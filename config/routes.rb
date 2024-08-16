@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get '/404', to: 'errors#not_found'
+  get '/500', to: 'errors#internal_server'
+  get '/403', to: 'errors#access_denied'
 
   get 'dashboard/index'
   get 'home' => 'home_index#index'
