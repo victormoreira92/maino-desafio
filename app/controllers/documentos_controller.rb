@@ -1,5 +1,6 @@
 class DocumentosController < ApplicationController
-  before_action :set_documento, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
+  #before_action :set_documento, only: %i[ show edit update destroy ]
 
   # GET /documentos or /documentos.json
   def index
