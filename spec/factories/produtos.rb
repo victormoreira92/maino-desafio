@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :produto do
-    xProd { "MyString" }
-    nCM { "MyString" }
-    cFOP { "MyString" }
-    uCom { "MyString" }
-    qCom { 1 }
-    vUnCom { "9.99" }
+    nome { "MyString" }
+    ncm { "MyString" }
+    cfop { "MyString" }
+    unidade_comercializada { "MyString" }
+    quantidade { 1 }
+    valor_unitario { "9.99" }
   end
 end

@@ -1,30 +1,31 @@
-<%= form_with(model: documento) do |form| %>
-  <% if documento.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(documento.errors.count, "error") %> prohibited this documento from being saved:</h2>
+<div class="row justify-content-center pt-2">
+<div class="card col-lg-6">
+  <%= form_with(model: documento, id: 'documento_form') do |form| %>
+    <div class="card-body register-card-body">
+      <p class="register-box-msg">Preencha e Anexe o documento</p>
 
-      <ul>
-        <% documento.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+      <div class="mb-3">
+
+        <hr class="mb-4"/>
+
+
+        <div class="row">
+          <div class="input-group mb-3 col-10">
+            <%= form.text_field :titulo, placeholder: 'Titulo', class: "form-control", autofocus: true %>
+          </div>
+          <div class="row">
+            <div class="input-group mb-3 col-10">
+              <%= form.file_field :arquivo, placeholder: 'Arquivo xml', title: "Adicione arquivo xml", class: "form-control", autofocus: true %>
+            </div>
+            <%= form.hidden_field :usuario_id, value: current_usuario.id %>
+          </div>
+          <%= form.submit class: 'btn btn-primary w-50' %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :titulo, style: "display: block" %>
-    <%= form.text_field :titulo %>
-  </div>
-
-  <div>
-    <%= form.label :arquivo, style: "display: block" %>
-    <%= form.file_field :arquivo %>
-
-  </div>
-  <%= form.hidden_field :usuario_id, value: current_usuario.id %>
-
-
-  <div>
-    <%= form.submit %>
   </div>
 <% end %>
+  </div>
+</div>
+
+

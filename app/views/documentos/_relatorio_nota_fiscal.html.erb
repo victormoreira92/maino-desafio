@@ -1,0 +1,199 @@
+<h6 class="text-center px-3"><%= @documento.arquivo.blob.filename.to_s %></h6>
+<div class="container-fluid p-5">
+  <div class="row p-2">
+    <div class="card card-outline col-12 p-2">
+      <div class="row p-2">
+        <div class="col">
+          <h1 class="text-center align-middle display-6">Relatório de Nota Fiscal</h1>
+        </div>
+      </div>
+      <hr class="mb-2"/>
+      <div class="card-body">
+        <h6 class="text-left"><i class="fas fa-id-card"></i> Dados do Documento Fiscal </h6>
+        <hr class="mb-2"/>
+
+        <dl class="row">
+          <div class="col-4">
+            <dt class="col-sm-12">Número de Série</dt>
+            <dd class="col-sm-8"> <%= nota_fiscal.serie %></dd>
+          </div>
+          <div class="col-4">
+            <dt class="col-sm-12">Número da Nota Fiscal:</dt>
+            <dd class="col-sm-8"><%= nota_fiscal.numero_nota_fiscal %></dd>
+          </div>
+          <div class="col-4">
+            <dt class="col-sm-12">Data e Hora de Emissão:</dt>
+            <dd class="col-sm-8"><%= nota_fiscal.data_emissao.strftime("%d/%m/%Y %H:%M:%S") %></dd>
+          </div>
+        </dl>
+        <dl class="row">
+          <h6 class="text-left">Dados do Eminente </h6>
+          <hr class="mb-2"/>
+
+          <div class="col-4">
+            <dt class="col-sm-4">CNPJ:</dt>
+            <dd class="col-sm-8"><%= nota_fiscal.dado_eminente.cnpj_eminente %></dd>
+          </div>
+
+          <div class="col-6">
+            <dt class="col-sm-4">Nome do Eminente:</dt>
+            <dd class="col-sm-8"><%=  nota_fiscal.dado_eminente.nome_eminente %></dd>
+          </div>
+
+          <div class="col-4">
+            <dt class="col-sm-6">CEP do Eminente</dt>
+            <dd class="col-sm-8"><%=  nota_fiscal.dado_eminente.cep_eminente%></dd>
+          </div>
+          <div class="col-4">
+            <dt class="col-sm-6">Endereço do Eminente</dt>
+            <dd class="col-sm-8"><%=  nota_fiscal.dado_eminente.logadouro_eminente %></dd>
+          </div>
+
+          <div class="col-4">
+            <dt class="col-sm-8">Complemento do Eminente</dt>
+            <dd class="col-sm-8"><%=  nota_fiscal.dado_eminente.complemento_eminente %></dd>
+          </div>
+          <div class="col-4">
+            <dt class="col-sm-6">Bairro do Eminente</dt>
+            <dd class="col-sm-8"><%=  nota_fiscal.dado_eminente.bairro_eminente %></dd>
+          </div>
+
+          <div class="col-4">
+            <dt class="col-sm-6">Município do Eminente</dt>
+            <dd class="col-sm-8"><%=  nota_fiscal.dado_eminente.municipio_eminente %></dd>
+          </div>
+
+          <div class="col-4">
+            <dt class="col-sm-6">UF do Eminente</dt>
+            <dd class="col-sm-8"><%=  nota_fiscal.dado_eminente.uf_eminente %></dd>
+          </div>
+
+          <div class="col-4">
+            <dt class="col-sm-6">País do Eminente</dt>
+            <dd class="col-sm-8"><%=  nota_fiscal.dado_eminente.pais_eminente%></dd>
+          </div>
+
+          <div class="col-6">
+            <dt class="col-sm-6">Telefone do Eminente</dt>
+            <dd class="col-sm-8"><%=  nota_fiscal.dado_eminente.fone %></dd>
+          </div>
+        </dl>
+        <dl class="row">
+          <h6 class="text-left"><i class="fas fa-map-marked-alt"></i> Dados do Destinatário </h6>
+          <hr class="mb-2"/>
+
+          <div class="col-4">
+            <dt class="col-sm-4">CNPJ:</dt>
+            <dd class="col-sm-8"><%=  nota_fiscal.dado_destinatario.cnpj_destinatario %></dd>
+          </div>
+
+          <div class="col-4">
+            <dt class="col-sm-8">Nome do Destinatário:</dt>
+            <dd class="col-sm-8"><%= nota_fiscal.dado_destinatario.nome_destinatario %></dd>
+          </div>
+
+          <div class="col-4">
+            <dt class="col-sm-6">CEP do Destinatário</dt>
+            <dd class="col-sm-8"><%= nota_fiscal.dado_destinatario.cep_destinatario %></dd>
+          </div>
+          <div class="col-4">
+            <dt class="col-sm-8">Endereço do Destinatário</dt>
+            <dd class="col-sm-8"><%= nota_fiscal.dado_destinatario.logadouro_destinatario %></dd>
+          </div>
+
+          <div class="col-4">
+            <dt class="col-sm-8">Complemento do Destinatário</dt>
+            <dd class="col-sm-8"><%= nota_fiscal.dado_destinatario.complemento_destinatario %></dd>
+          </div>
+          <div class="col-4">
+            <dt class="col-sm-6">Bairro do Destinatário</dt>
+            <dd class="col-sm-8"><%= nota_fiscal.dado_destinatario.bairro_destinatario %></dd>
+          </div>
+
+          <div class="col-4">
+            <dt class="col-sm-6">Município do Destinatário</dt>
+            <dd class="col-sm-8"><%= nota_fiscal.dado_destinatario.municipio_destinatario %></dd>
+          </div>
+
+          <div class="col-4">
+            <dt class="col-sm-6">UF do Destinatário</dt>
+            <dd class="col-sm-8"><%= nota_fiscal.dado_destinatario.uf_destinatario %></dd>
+          </div>
+
+          <div class="col-4">
+            <dt class="col-sm-6">País do Eminente</dt>
+            <dd class="col-sm-8"><%= nota_fiscal.dado_destinatario.pais_destinatario %></dd>
+          </div>
+
+        </dl>
+
+        <br>
+        <h6 class="text-left"><i class="fas fa-map-marked-alt"></i>Produtos Listados</h6>
+        <hr class="mb-2"/>
+        <dl class="row px-2">
+          <dt class="col-sm-2">NCM</dt>
+          <dt class="col-sm-2">CFOP</dt>
+          <dt class="col-sm-2">Nome do produto</dt>
+          <dt class="col-sm-2">Quantidade</dt>
+          <dt class="col-sm-2">Valor Unitário</dt>
+
+        </dl>
+        <% nota_fiscal.produtos.each do |produto| %>
+          <dl class="row px-2">
+            <dd class="col-sm-2"><%= produto.ncm %></dd>
+            <dd class="col-sm-2"><%= produto.cfop %></dd>
+            <dd class="col-sm-2"><%= produto.nome %></dd>
+            <dd class="col-sm-2"><%= produto.unidade_comercializada %></dd>
+            <dd class="col-sm-2">R$ <%= produto.quantidade %></dd>
+            <dd class="col-sm-2"><%= produto.valor_unitario %></dd>
+          </dl>
+        <% end %>
+
+        <br>
+
+        <br>
+        <h6 class="text-left"><i class="fas fa-money-bill"></i>Impostos</h6>
+        <hr class="mb-2"/>
+        <dl class="row">
+          <div class="col-3">
+            <dt class="col-sm-4">PIS:</dt>
+            <dd class="col-sm-8">R$<%= nota_fiscal.imposto.valor_pis %></dd>
+          </div>
+
+          <div class="col-3">
+            <dt class="col-sm-4">COFINS:</dt>
+            <dd class="col-sm-8">R$<%= nota_fiscal.imposto.valor_cofins %></dd>
+          </div>
+
+          <div class="col-3">
+            <dt class="col-sm-4">IPI:</dt>
+            <dd class="col-sm-8">R$<%= nota_fiscal.imposto.valor_ipi %></dd>
+          </div>
+
+          <div class="col-3">
+            <dt class="col-sm-4">ICMS:</dt>
+            <dd class="col-sm-8">R$<%= nota_fiscal.imposto.valor_icms %></dd>
+          </div>
+        </dl>
+        <h6 class="text-left"><i class="fas fa-money-bill"></i>Valores Totais</h6>
+        <hr class="mb-2"/>
+        <dl class="row">
+          <div class="col-4">
+            <dt class="col-sm-8">Valor Total dos Produtos:</dt>
+            <dd class="col-sm-8">R$ <%= nota_fiscal.valor_total.valor_produtos %></dd>
+          </div>
+
+          <div class="col-4">
+            <dt class="col-sm-8">Valor Total dos Impostos:</dt>
+            <dd class="col-sm-8">R$ <%= nota_fiscal.valor_total.valor_imposto %></dd>
+          </div>
+        </dl>
+      </div>
+
+      <br/>
+      <div class="row ml-1 mb-1 d-flex justify-content-center">
+        <%= link_to 'Exportar',"#" ,class: "btn btn-success col-6" %>
+      </div>
+    </div>
+  </div>
+</div>

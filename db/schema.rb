@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_16_202104) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_18_202948) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,39 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_16_202104) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "dados_destinatarios", force: :cascade do |t|
+    t.string "cnpj_destinatario"
+    t.string "nome_destinatario"
+    t.string "logadouro_destinatario"
+    t.string "complemento_destinatario"
+    t.string "bairro_destinatario"
+    t.string "municipio_destinatario"
+    t.string "uf_destinatario"
+    t.string "cep_destinatario"
+    t.string "pais_destinatario"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "nota_fiscal_id", null: false
+    t.index ["nota_fiscal_id"], name: "index_dados_destinatarios_on_nota_fiscal_id"
+  end
+
+  create_table "dados_eminentes", force: :cascade do |t|
+    t.string "cnpj_eminente"
+    t.string "nome_eminente"
+    t.string "logadouro_eminente"
+    t.string "complemento_eminente"
+    t.string "bairro_eminente"
+    t.string "municipio_eminente"
+    t.string "uf_eminente"
+    t.string "cep_eminente"
+    t.string "pais_eminente"
+    t.string "fone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "nota_fiscal_id", null: false
+    t.index ["nota_fiscal_id"], name: "index_dados_eminentes_on_nota_fiscal_id"
+  end
+
   create_table "documentos", force: :cascade do |t|
     t.string "titulo"
     t.bigint "usuario_id", null: false
@@ -50,16 +83,46 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_16_202104) do
     t.index ["usuario_id"], name: "index_documentos_on_usuario_id"
   end
 
+  create_table "impostos", force: :cascade do |t|
+    t.decimal "valor_icms"
+    t.decimal "valor_ipi"
+    t.decimal "valor_pis"
+    t.decimal "valor_cofins"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "nota_fiscal_id", null: false
+    t.index ["nota_fiscal_id"], name: "index_impostos_on_nota_fiscal_id"
+  end
+
   create_table "notas_fiscais", force: :cascade do |t|
     t.string "serie"
-    t.string "nNF"
-    t.datetime "dhEmi"
-    t.string "dest"
+    t.string "numero_nota_fiscal"
+    t.datetime "data_emissao"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "documento_id", null: false
-    t.string "emit"
     t.index ["documento_id"], name: "index_notas_fiscais_on_documento_id"
+  end
+
+  create_table "produtos", force: :cascade do |t|
+    t.string "nome"
+    t.string "ncm"
+    t.string "cfop"
+    t.string "unidade_comercializada"
+    t.integer "quantidade"
+    t.decimal "valor_unitario"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "nota_fiscal_id", null: false
+    t.index ["nota_fiscal_id"], name: "index_produtos_on_nota_fiscal_id"
+  end
+
+  create_table "relatorios", force: :cascade do |t|
+    t.string "dados"
+    t.bigint "documento_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["documento_id"], name: "index_relatorios_on_documento_id"
   end
 
   create_table "usuarios", force: :cascade do |t|
@@ -76,8 +139,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_16_202104) do
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
+  create_table "valores_totais", force: :cascade do |t|
+    t.decimal "valor_produtos"
+    t.decimal "valor_imposto"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "nota_fiscal_id", null: false
+    t.index ["nota_fiscal_id"], name: "index_valores_totais_on_nota_fiscal_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "dados_destinatarios", "notas_fiscais", on_delete: :cascade
+  add_foreign_key "dados_eminentes", "notas_fiscais", on_delete: :cascade
   add_foreign_key "documentos", "usuarios"
+  add_foreign_key "impostos", "notas_fiscais", on_delete: :cascade
   add_foreign_key "notas_fiscais", "documentos"
+  add_foreign_key "produtos", "notas_fiscais", on_delete: :cascade
+  add_foreign_key "relatorios", "documentos"
+  add_foreign_key "valores_totais", "notas_fiscais", on_delete: :cascade
 end

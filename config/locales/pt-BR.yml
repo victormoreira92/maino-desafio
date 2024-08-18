@@ -23,16 +23,22 @@ pt-BR:
         dest: "Destinatário"
       produto:
         xProd: "Nome"
-        NCM: "NCM"
+        nCM: "NCM"
         cFOP: "CFOP"
         uCom: "Unidade Comercializada"
         qCom: "Quantidade Comercializada"
-        vUnCom: "Valor Unitário"
+        vUnCom:
+      imposto:
+        vICMS: "Valor do ICMS"
+        vIPI: "Valor do IPI"
+        vPIS: "Valor do PIS"
+        vCOFINS: "Valor do COFINS"
     success:
       messages:
         create: '%{model} foi cadastrado com sucesso'
         update: '%{model} foi editado com sucesso'
         destroy: '%{model} foi deletado com sucesso'
+        relatorio: 'Relatório sendo gerado, recarregue a página para ver o relatório'
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

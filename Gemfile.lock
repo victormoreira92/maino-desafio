@@ -93,6 +93,7 @@ GEM
       xpath (~> 3.2)
     coderay (1.1.3)
     concurrent-ruby (1.3.4)
+    connection_pool (2.4.1)
     crass (1.0.6)
     cssbundling-rails (1.4.1)
       railties (>= 6.0.0)
@@ -158,6 +159,7 @@ GEM
     nokogiri (1.15.6-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    ox (2.14.18)
     parallel (1.26.2)
     parser (3.3.4.2)
       ast (~> 2.4.1)
@@ -210,6 +212,9 @@ GEM
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
+    redis (4.8.1)
+    redis-client (0.22.2)
+      connection_pool
     regexp_parser (2.9.2)
     reline (0.5.9)
       io-console (~> 0.5)
@@ -266,6 +271,12 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sidekiq (7.3.1)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      logger
+      rack (>= 2.2.4)
+      redis-client (>= 0.22.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -318,17 +329,20 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   minitest (= 5.24.1)
+  ox
   pg (~> 1.1)
   pry
   puma (~> 5.0)
   rack_session_access
   rails (~> 7.0.8, >= 7.0.8.4)
+  redis
   rspec-rails (~> 6.1.0)
   rubocop
   rubocop-performance
   rubocop-rails
   rubocop-rspec
   selenium-webdriver (>= 4.0.0.rc1)
+  sidekiq
   sprockets-rails
   stimulus-rails
   turbo-rails

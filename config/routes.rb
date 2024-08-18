@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  get 'relatorio/mostrar_relatorio'
+  get 'relatorio/gerar_relatorio'
+  get 'relatorio/exportar_relatorio'
+  get 'relatorios_controllers/gerar_relatorio'
+  get 'relatorios_controllers/mostrar_relatorio'
+  get 'relatorios_controllers/exportar_relatorio'
+
+  require 'sidekiq/web'
+
+  mount Sidekiq::Web => '/sidekiq'
+
   get '/404', to: 'errors#not_found'
   get '/500', to: 'errors#internal_server'
   get '/403', to: 'errors#access_denied'
@@ -13,7 +24,14 @@ Rails.application.routes.draw do
     }
 
   resources :usuarios, except: %i[create destroy]
-  resources :documentos
+  resources :documentos do
+    member do
+      get :gerar_relatorio
+      get :mostrar_relatorio
+    end
+  end
+
+
 
 
 
