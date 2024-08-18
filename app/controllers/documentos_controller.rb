@@ -7,6 +7,27 @@ class DocumentosController < ApplicationController
     @documentos = Documento.all
   end
 
+  def mostrar_relatorio
+    @documento = Documento.find(params[:id])
+    @notas_fiscais = @documento.notas_fiscais
+  end
+
+  def gerar_relatorio
+    Validador::XmlValidadorService.new(@documento.arquivo.download, @documento).call
+
+    respond_to do |format|
+      if @documento.errors.empty?
+        flash[:success] = t('activerecord.success.messages.relatorio')
+        XmlProcessadorJob.perform_async(@documento.arquivo.download, @documento.id)
+        format.html { redirect_to documentos_url }
+      else
+        flash[:error] = @documento.errors.full_messages
+        format.html{ redirect_to documentos_url}
+      end
+    end
+  end
+
+
   # GET /documentos/1 or /documentos/1.json
   def show
   end
@@ -27,7 +48,7 @@ class DocumentosController < ApplicationController
     respond_to do |format|
       if @documento.save
         flash[:success] = t('activerecord.success.messages.create', model: Documento.model_name.human)
-        format.html { redirect_to documento_url(@documento)}
+        format.html { redirect_to documentos_url}
       else
         flash[:error] = @documento.errors.full_messages
         format.html { render :new, status: :unprocessable_entity }
@@ -35,12 +56,15 @@ class DocumentosController < ApplicationController
     end
   end
 
+
+
+
   # PATCH/PUT /documentos/1 or /documentos/1.json
   def update
     respond_to do |format|
       if @documento.update(documento_params)
         flash[:success] = t('activerecord.success.messages.update', model: Documento.model_name.human)
-        format.html { redirect_to documento_url(@documento)}
+        format.html { redirect_to documentos_url}
       else
         flash[:error] = @documento.errors.full_messages
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +78,7 @@ class DocumentosController < ApplicationController
 
     respond_to do |format|
       flash[:success] = t('activerecord.success.messages.destroy', model: Documento.model_name.human)
-      format.html { redirect_to documentos_url}
+      format.json { head :no_content }
     end
   end
 

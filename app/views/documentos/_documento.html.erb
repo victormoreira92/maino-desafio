@@ -8,6 +8,8 @@
         <%= link_to "Editar",edit_documento_path(documento), class:"btn btn-warning" %>
         <%= link_to "Deletar", documento_path(documento),method: :delete,
                     class:"btn btn-danger" %>
+
+        <%= @dados %>
       </div>
     </div>
   </div>

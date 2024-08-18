@@ -1,0 +1,5 @@
+<div>
+  <% @notas_fiscais.each do |nota_fiscal| %>
+    <%= render 'relatorio_nota_fiscal', nota_fiscal: nota_fiscal, documeto: @documento  %>
+  <% end %>
+</div>

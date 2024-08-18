@@ -16,6 +16,12 @@ class Ability
 
       #Documento
       can %i[read update destroy], Documento, usuario_id: usuario.id
+
+      #Relatorio
+      can :gerar_relatorio, Relatorio do |relatorio|
+        relatorio.documento.usuario_id == usuario.id
+      end
+
     end
   end
 end

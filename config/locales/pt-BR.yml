@@ -4,6 +4,7 @@ pt-BR:
     models:
       usuario: "Usuário"
       documento: "Documento"
+      nota_fiscal: "Nota Fiscal"
     attributes:
       usuario:
         password: "Senha"
@@ -11,11 +12,33 @@ pt-BR:
         perfil:
           adm: "Administrador"
           cliente: "Cliente"
+      documento:
+        titulo: "Título"
+        arquivo: "Arquivo"
+      nota_fiscal:
+        serie: "Número de Série"
+        nNF: "Número da Nota Fiscal"
+        dhEmi: "Data e Hora de Emissão"
+        emit: "Dados do Emitente"
+        dest: "Destinatário"
+      produto:
+        xProd: "Nome"
+        nCM: "NCM"
+        cFOP: "CFOP"
+        uCom: "Unidade Comercializada"
+        qCom: "Quantidade Comercializada"
+        vUnCom:
+      imposto:
+        vICMS: "Valor do ICMS"
+        vIPI: "Valor do IPI"
+        vPIS: "Valor do PIS"
+        vCOFINS: "Valor do COFINS"
     success:
       messages:
         create: '%{model} foi cadastrado com sucesso'
         update: '%{model} foi editado com sucesso'
         destroy: '%{model} foi deletado com sucesso'
+        relatorio: 'Relatório sendo gerado, recarregue a página para ver o relatório'
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'
