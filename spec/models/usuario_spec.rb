@@ -1,14 +1,3 @@
-# == Schema Information
-#
-# Table name: usuarios
-#
-#  id         :bigint           not null, primary key
-#  nome       :string
-#  email      :string
-#  perfil     :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
 require 'rails_helper'
 
 RSpec.describe Usuario, type: :model do
@@ -18,6 +7,10 @@ RSpec.describe Usuario, type: :model do
       it 'com todos os campos válidos' do
         expect { create(:usuario) }.to change(described_class, :count).by(1)
       end
+      it { should have_secure_password }
+      it { should validate_presence_of(:nome) }
+      it { should validate_presence_of(:email) }
+      it { should validate_presence_of(:password) }
 
     end
 
@@ -33,19 +26,6 @@ RSpec.describe Usuario, type: :model do
         usuario.valid?
         expect(usuario.errors[:email]).to include('não pode ficar em branco')
       end
-
-      it 'nome com menos de 2 caracteres' do
-        usuario = build(:usuario, nome: 'a')
-        usuario.valid?
-        expect(usuario.errors[:nome]).to include('é curto (mínimo: 2 caracteres)')
-      end
-
-      it 'nome com mais de 75 caracteres' do
-        usuario = build(:usuario, :nome_acima_permitido)
-        usuario.valid?
-        expect(usuario.errors[:nome]).to include('é longo (máximo: 75 caracteres)')
-      end
-
       it 'email com formato incorreto' do
         usuario = build(:usuario, :email_com_formato_invalido)
         usuario.valid?

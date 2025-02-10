@@ -2,18 +2,17 @@
 #
 # Table name: usuarios
 #
-#  id         :bigint           not null, primary key
-#  nome       :string
-#  email      :string
-#  perfil     :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :bigint           not null, primary key
+#  nome            :string           not null
+#  email           :string           not null
+#  password_digest :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 FactoryBot.define do
   factory :usuario do
     nome { Faker::Name.name }
     email { Faker::Internet.email }
-    perfil { 0 }
     password { "123456" }
     password_confirmation { "123456" }
   end
