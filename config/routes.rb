@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'sessions/entrar'
+  get 'sessions/cadastrar'
   require 'sidekiq/web'
 
   mount Sidekiq::Web => '/sidekiq'
