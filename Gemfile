@@ -57,6 +57,7 @@ gem "cancancan"
 gem 'sidekiq'
 gem 'ox'
 gem 'redis'
+gem 'rename'
 
 group :development, :test do
   gem 'awesome_print'
@@ -89,4 +90,3 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
 end
-

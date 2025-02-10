@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name":"data_flow_manage",
   "private": true,
   "devDependencies": {
     "webpack": "^5.93.0",
