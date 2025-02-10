@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: documentos
+#
+#  id         :bigint           not null, primary key
+#  titulo     :string
+#  usuario_id :bigint           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 FactoryBot.define do
   factory :documento do
     titulo { Faker::Lorem.word }

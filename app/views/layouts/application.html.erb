@@ -16,9 +16,6 @@
   </head>
 
   <body>
-  <% unless devise_controller? %>
-    <%= render 'shared/navbar' %>
-  <% end %>
   <% flash.each do |key, message| %>
     <% if message.kind_of?(Array) %>
       <div class="alert <%= flash_class(key) %> alert-dismissible text-center" id="alert">

@@ -60,7 +60,6 @@ RSpec.configure do |config|
   # https://rspec.info/features/6-0/rspec-rails
   config.infer_spec_type_from_file_location!
 
-  config.include Devise::Test::IntegrationHelpers, type: :request
   config.extend RequestMacros, type: :request
   config.include ActiveStorageValidations::Matchers
 

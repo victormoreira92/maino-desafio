@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :nao_encontrado
-  rescue_from CanCan::AccessDenied, with: :acesso_negado
+
   def after_sign_in_path_for(usuario)
     session[:usuario_id] = usuario.id
     root_path
@@ -8,10 +8,6 @@ class ApplicationController < ActionController::Base
 
   def after_sign_out_path_for(usuario)
     home_path
-  end
-
-  def current_ability
-    @current_ability ||= Ability.new(current_usuario)
   end
 
   private
