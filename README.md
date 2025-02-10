@@ -1,7 +1,6 @@
-# Desafio Tecnico para Vaga de BackEnd junior 
+# XML Flow 
 
-Aplicação Web para geração de relátorios de arquivos de notas fiscais em xml, com autenticação de usuário, 
-upload de documentos e geraração de relatórios detalhados
+pt-br: Aplicação Web com autenticação para leitura de arquivos em XML e CSV, assim como a leitura zip ou em lote. Mostrar os dados em tabela com filtragem e permitir o download em xml, xls, csv e json
 
 ## Estrutura 
 * Ruby: version 3.0.2
@@ -16,3 +15,5 @@ upload de documentos e geraração de relatórios detalhados
 
 
 ## Documentação 
+
+
