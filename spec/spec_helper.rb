@@ -14,7 +14,6 @@
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'faker'
-require 'capybara/rspec'
 require 'active_storage_validations/matchers'
 
 RSpec.configure do |config|
