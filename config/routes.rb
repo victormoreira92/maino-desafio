@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'sessions/entrar'
-  get 'sessions/cadastrar'
+
   require 'sidekiq/web'
 
   mount Sidekiq::Web => '/sidekiq'
@@ -20,5 +19,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'dashboard#index'
+  resources :sessions, only: %i[new create destroy]
+
+  root 'home_index#index'
 end

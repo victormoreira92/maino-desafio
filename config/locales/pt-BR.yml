@@ -35,12 +35,14 @@ pt-BR:
         vCOFINS: "Valor do COFINS"
     success:
       messages:
+        login: 'Bem vindo, a área restrita'
         create: '%{model} foi cadastrado com sucesso'
         update: '%{model} foi editado com sucesso'
         destroy: '%{model} foi deletado com sucesso'
         relatorio: 'Relatório sendo gerado, recarregue a página para ver o relatório'
     errors:
       messages:
+        login_invalid: 'Email ou senha são inválidos'
         record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente

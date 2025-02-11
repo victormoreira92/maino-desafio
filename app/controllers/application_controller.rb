@@ -1,9 +1,8 @@
 class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :nao_encontrado
 
-  def after_sign_in_path_for(usuario)
-    session[:usuario_id] = usuario.id
-    root_path
+  def current_usuario
+    @current_usuario ||= session[:usuario_id] && Usuario.find_by(id: session[:usuario_id])
   end
 
   def after_sign_out_path_for(usuario)

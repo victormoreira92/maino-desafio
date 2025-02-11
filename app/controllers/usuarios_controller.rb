@@ -17,7 +17,7 @@ class UsuariosController < ApplicationController
     respond_to do |format|
       if @usuario.save
         flash[:success] = t('activerecord.success.messages.create', model: Usuario.model_name.human)
-        format.html { redirect_to usuario_url(@usuario)}
+        format.html { redirect_to new_session_path}
       else
         flash[:error] = @usuario.errors.full_messages
         format.html { render :new, status: :unprocessable_entity }
