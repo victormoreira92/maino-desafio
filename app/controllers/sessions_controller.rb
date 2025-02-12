@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
 
 
   def create
-    binding.pry
     @usuario = Usuario.find_by(email: usuario_params[:email])
 
     if @usuario && @usuario.authenticate(usuario_params[:password])
@@ -20,8 +19,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session = nil
-    redirect_to home_index_path
+    session[:usuario_id] = nil
+    flash[:success] = t('activerecord.success.messages.sign_out')
+    redirect_to home_path
   end
 
   def usuario_params

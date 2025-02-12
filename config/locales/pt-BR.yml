@@ -36,6 +36,7 @@ pt-BR:
     success:
       messages:
         login: 'Bem vindo, a área restrita'
+        sign_out: 'Deslogado com sucesso'
         create: '%{model} foi cadastrado com sucesso'
         update: '%{model} foi editado com sucesso'
         destroy: '%{model} foi deletado com sucesso'
@@ -44,6 +45,7 @@ pt-BR:
       messages:
         login_invalid: 'Email ou senha são inválidos'
         record_invalid: 'A validação falhou: %{errors}'
+        usuario_not_sign_in: 'Área restrita: Necessária a autenticação para o acesso'
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
